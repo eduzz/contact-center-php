@@ -1,0 +1,29 @@
+{
+    "name": "eduzz/contact-center-php",
+    "description": "Package para utilizacao do Contact Center Eduzz",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Eduzz\\ContactCenter\\" : "src/"         
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Eduzz\\ContactCenter\\Tests\\APIResponses\\" : "tests/APIResponses"         
+        }
+    },
+    "authors": [
+        {
+            "name": "Diogo M Mainardes",
+            "email": "diogo.mainardes@eduzz.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "mockery/mockery": "^1.2",
+        "phpunit/php-code-coverage": "^6.1"
+    }
+}

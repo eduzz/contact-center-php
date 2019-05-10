@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  php:
+    build:
+      dockerfile: ./docker/test/Dockerfile
+      context: .
+    image: eduzz/contactcenter:tests
+    volumes:
+      - ./:/src
+    command:
+      - "/src/vendor/bin/phpunit"
+
