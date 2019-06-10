@@ -11,6 +11,7 @@ abstract class Message
 
   protected $schedule;
   protected $template;
+  protected $callbackError;
 
   public function template(string $templateId){
     $this->template = $templateId;
@@ -24,6 +25,11 @@ abstract class Message
 
   public function metadata(array $metadata){
     $this->metadata = $metadata;
+    return $this;
+  }
+
+  public function onError(callable $callback){
+    $this->callbackError = $callback;
     return $this;
   }
 
