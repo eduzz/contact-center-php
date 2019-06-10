@@ -50,11 +50,13 @@ Eduzz\ContactCenter\Tests\Messages\EmailMessage
  [x] Send without schedule field
  [x] Send with schedule field
  [x] Validation exception on call a p i
- [x] Exception when a p i is down
+ [x] Exception when a p i is down with no custom callback
+ [x] Exception when a p i is down with custom callback
 
 Eduzz\ContactCenter\Tests\Messages\SMSMessage
  [x] Send without schedule field
  [x] Send with schedule field
  [x] Validation exception on call a p i
  [x] Exception when a p i is down
+ [x] Exception when a p i is down with custom callback
 

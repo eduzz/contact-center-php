@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1554693857">
-  <project timestamp="1554693857">
+<coverage generated="1560201596">
+  <project timestamp="1560201596">
     <package name="Eduzz\ContactCenter">
       <file name="/src/src/Constants.php">
         <class name="Eduzz\ContactCenter\Constants" namespace="Eduzz\ContactCenter">
@@ -10,7 +10,7 @@
       </file>
       <file name="/src/src/ContactCenter.php">
         <class name="Eduzz\ContactCenter\ContactCenter" namespace="Eduzz\ContactCenter">
-          <metrics complexity="11" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="34" coveredelements="34"/>
+          <metrics complexity="11" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="38" coveredelements="38"/>
         </class>
         <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="27" type="stmt" count="1"/>
@@ -39,14 +39,18 @@
         <line num="69" type="stmt" count="1"/>
         <line num="72" type="method" name="createEmailMessage" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="74" type="stmt" count="1"/>
-        <line num="77" type="method" name="createSMSMessage" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="79" type="stmt" count="1"/>
-        <line num="82" type="method" name="getClientHttp" visibility="public" complexity="2" crap="2" count="1"/>
-        <line num="84" type="stmt" count="1"/>
-        <line num="85" type="stmt" count="1"/>
-        <line num="87" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="79" type="method" name="createSMSMessage" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="83" type="stmt" count="1"/>
+        <line num="86" type="method" name="getClientHttp" visibility="private" complexity="2" crap="2" count="1"/>
+        <line num="88" type="stmt" count="1"/>
+        <line num="89" type="stmt" count="1"/>
         <line num="91" type="stmt" count="1"/>
-        <metrics loc="93" ncloc="93" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="34" coveredelements="34"/>
+        <line num="95" type="stmt" count="1"/>
+        <metrics loc="97" ncloc="97" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="28" elements="38" coveredelements="38"/>
       </file>
     </package>
     <package name="Eduzz\ContactCenter\Entities">
@@ -54,26 +58,26 @@
         <class name="Eduzz\ContactCenter\Entities\Person" namespace="Eduzz\ContactCenter\Entities">
           <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
         </class>
-        <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="12" type="stmt" count="6"/>
-        <line num="13" type="stmt" count="6"/>
-        <line num="14" type="stmt" count="6"/>
-        <line num="16" type="method" name="toArray" visibility="public" complexity="2" crap="2" count="6"/>
-        <line num="18" type="stmt" count="6"/>
-        <line num="19" type="stmt" count="6"/>
-        <line num="20" type="stmt" count="6"/>
-        <line num="22" type="stmt" count="6"/>
+        <line num="10" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="12" type="stmt" count="7"/>
+        <line num="13" type="stmt" count="7"/>
+        <line num="14" type="stmt" count="7"/>
+        <line num="16" type="method" name="toArray" visibility="public" complexity="2" crap="2" count="7"/>
+        <line num="18" type="stmt" count="7"/>
+        <line num="19" type="stmt" count="7"/>
+        <line num="20" type="stmt" count="7"/>
+        <line num="22" type="stmt" count="7"/>
         <metrics loc="23" ncloc="23" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
       </file>
       <file name="/src/src/Entities/Phone.php">
         <class name="Eduzz\ContactCenter\Entities\Phone" namespace="Eduzz\ContactCenter\Entities">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
         </class>
-        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="15" type="stmt" count="4"/>
-        <line num="16" type="stmt" count="4"/>
-        <line num="17" type="stmt" count="4"/>
-        <line num="18" type="stmt" count="4"/>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="15" type="stmt" count="5"/>
+        <line num="16" type="stmt" count="5"/>
+        <line num="17" type="stmt" count="5"/>
+        <line num="18" type="stmt" count="5"/>
         <line num="20" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="23" type="stmt" count="1"/>
         <line num="24" type="stmt" count="1"/>
@@ -237,120 +241,127 @@
     <package name="Eduzz\ContactCenter\Messages">
       <file name="/src/src/Messages/EmailMessage.php">
         <class name="Eduzz\ContactCenter\Messages\EmailMessage" namespace="Eduzz\ContactCenter\Messages">
-          <metrics complexity="21" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="53" elements="63" coveredelements="63"/>
+          <metrics complexity="22" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="65" coveredelements="65"/>
         </class>
-        <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="25" type="stmt" count="7"/>
-        <line num="27" type="stmt" count="7"/>
-        <line num="28" type="stmt" count="7"/>
-        <line num="29" type="stmt" count="7"/>
-        <line num="30" type="stmt" count="7"/>
-        <line num="31" type="stmt" count="7"/>
-        <line num="32" type="stmt" count="7"/>
-        <line num="33" type="stmt" count="7"/>
-        <line num="34" type="stmt" count="7"/>
-        <line num="36" type="method" name="to" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="37" type="stmt" count="6"/>
-        <line num="38" type="stmt" count="6"/>
-        <line num="41" type="method" name="cc" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="42" type="stmt" count="6"/>
-        <line num="43" type="stmt" count="6"/>
-        <line num="46" type="method" name="bcc" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="47" type="stmt" count="6"/>
-        <line num="48" type="stmt" count="6"/>
-        <line num="51" type="method" name="replyTo" visibility="public" complexity="2" crap="2" count="6"/>
-        <line num="53" type="stmt" count="6"/>
-        <line num="54" type="stmt" count="6"/>
-        <line num="55" type="stmt" count="6"/>
-        <line num="57" type="stmt" count="6"/>
-        <line num="58" type="stmt" count="6"/>
-        <line num="62" type="method" name="from" visibility="public" complexity="2" crap="2" count="6"/>
-        <line num="63" type="stmt" count="6"/>
-        <line num="64" type="stmt" count="6"/>
-        <line num="65" type="stmt" count="6"/>
-        <line num="67" type="stmt" count="6"/>
-        <line num="69" type="stmt" count="6"/>
-        <line num="72" type="method" name="params" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="73" type="stmt" count="6"/>
-        <line num="74" type="stmt" count="6"/>
-        <line num="77" type="method" name="subject" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="78" type="stmt" count="6"/>
-        <line num="79" type="stmt" count="6"/>
-        <line num="82" type="method" name="prepareData" visibility="private" complexity="9" crap="9" count="6"/>
-        <line num="83" type="stmt" count="6"/>
-        <line num="85" type="stmt" count="6"/>
-        <line num="86" type="stmt" count="6"/>
-        <line num="88" type="stmt" count="6"/>
-        <line num="89" type="stmt" count="6"/>
-        <line num="91" type="stmt" count="6"/>
-        <line num="92" type="stmt" count="6"/>
-        <line num="94" type="stmt" count="6"/>
-        <line num="95" type="stmt" count="6"/>
-        <line num="97" type="stmt" count="6"/>
-        <line num="98" type="stmt" count="6"/>
-        <line num="100" type="stmt" count="6"/>
-        <line num="101" type="stmt" count="6"/>
-        <line num="103" type="stmt" count="6"/>
-        <line num="104" type="stmt" count="6"/>
-        <line num="106" type="stmt" count="6"/>
+        <line num="24" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="25" type="stmt" count="8"/>
+        <line num="27" type="stmt" count="8"/>
+        <line num="28" type="stmt" count="8"/>
+        <line num="29" type="stmt" count="8"/>
+        <line num="30" type="stmt" count="8"/>
+        <line num="31" type="stmt" count="8"/>
+        <line num="32" type="stmt" count="8"/>
+        <line num="33" type="stmt" count="8"/>
+        <line num="34" type="stmt" count="8"/>
+        <line num="36" type="method" name="to" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="37" type="stmt" count="7"/>
+        <line num="38" type="stmt" count="7"/>
+        <line num="41" type="method" name="cc" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="42" type="stmt" count="7"/>
+        <line num="43" type="stmt" count="7"/>
+        <line num="46" type="method" name="bcc" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="47" type="stmt" count="7"/>
+        <line num="48" type="stmt" count="7"/>
+        <line num="51" type="method" name="replyTo" visibility="public" complexity="2" crap="2" count="7"/>
+        <line num="53" type="stmt" count="7"/>
+        <line num="54" type="stmt" count="7"/>
+        <line num="55" type="stmt" count="7"/>
+        <line num="57" type="stmt" count="7"/>
+        <line num="58" type="stmt" count="7"/>
+        <line num="62" type="method" name="from" visibility="public" complexity="2" crap="2" count="7"/>
+        <line num="63" type="stmt" count="7"/>
+        <line num="64" type="stmt" count="7"/>
+        <line num="65" type="stmt" count="7"/>
+        <line num="67" type="stmt" count="7"/>
+        <line num="69" type="stmt" count="7"/>
+        <line num="72" type="method" name="params" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="73" type="stmt" count="7"/>
+        <line num="74" type="stmt" count="7"/>
+        <line num="77" type="method" name="subject" visibility="public" complexity="1" crap="1" count="7"/>
+        <line num="78" type="stmt" count="7"/>
+        <line num="79" type="stmt" count="7"/>
+        <line num="82" type="method" name="prepareData" visibility="private" complexity="9" crap="9" count="7"/>
+        <line num="83" type="stmt" count="7"/>
+        <line num="85" type="stmt" count="7"/>
+        <line num="86" type="stmt" count="7"/>
+        <line num="88" type="stmt" count="7"/>
+        <line num="89" type="stmt" count="7"/>
+        <line num="91" type="stmt" count="7"/>
+        <line num="92" type="stmt" count="7"/>
+        <line num="94" type="stmt" count="7"/>
+        <line num="95" type="stmt" count="7"/>
+        <line num="97" type="stmt" count="7"/>
+        <line num="98" type="stmt" count="7"/>
+        <line num="100" type="stmt" count="7"/>
+        <line num="101" type="stmt" count="7"/>
+        <line num="103" type="stmt" count="7"/>
+        <line num="104" type="stmt" count="7"/>
+        <line num="106" type="stmt" count="7"/>
         <line num="107" type="stmt" count="1"/>
-        <line num="109" type="stmt" count="6"/>
-        <line num="113" type="method" name="send" visibility="public" complexity="2" crap="2" count="6"/>
-        <line num="116" type="stmt" count="6"/>
-        <line num="117" type="stmt" count="6"/>
-        <line num="119" type="stmt" count="6"/>
+        <line num="109" type="stmt" count="7"/>
+        <line num="113" type="method" name="send" visibility="public" complexity="3" crap="3" count="7"/>
+        <line num="116" type="stmt" count="7"/>
+        <line num="117" type="stmt" count="7"/>
+        <line num="119" type="stmt" count="7"/>
         <line num="122" type="stmt" count="2"/>
-        <line num="124" type="stmt" count="4"/>
-        <line num="125" type="stmt" count="2"/>
-        <metrics loc="129" ncloc="129" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="53" elements="63" coveredelements="63"/>
+        <line num="124" type="stmt" count="5"/>
+        <line num="126" type="stmt" count="3"/>
+        <line num="127" type="stmt" count="1"/>
+        <line num="129" type="stmt" count="2"/>
+        <metrics loc="133" ncloc="133" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="55" coveredstatements="55" elements="65" coveredelements="65"/>
       </file>
       <file name="/src/src/Messages/Message.php">
         <class name="Eduzz\ContactCenter\Messages\Message" namespace="Eduzz\ContactCenter\Messages">
-          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+          <metrics complexity="5" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="12" coveredelements="12"/>
         </class>
-        <line num="15" type="method" name="template" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="16" type="stmt" count="5"/>
-        <line num="17" type="stmt" count="5"/>
-        <line num="20" type="method" name="schedule" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="21" type="stmt" count="2"/>
+        <line num="16" type="method" name="template" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="17" type="stmt" count="6"/>
+        <line num="18" type="stmt" count="6"/>
+        <line num="21" type="method" name="schedule" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="22" type="stmt" count="2"/>
-        <line num="25" type="method" name="metadata" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="26" type="stmt" count="2"/>
+        <line num="23" type="stmt" count="2"/>
+        <line num="26" type="method" name="metadata" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="27" type="stmt" count="2"/>
-        <metrics loc="30" ncloc="30" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
+        <line num="28" type="stmt" count="2"/>
+        <line num="31" type="method" name="onError" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="32" type="stmt" count="3"/>
+        <line num="33" type="stmt" count="3"/>
+        <metrics loc="36" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="12" coveredelements="12"/>
       </file>
       <file name="/src/src/Messages/SMSMessage.php">
         <class name="Eduzz\ContactCenter\Messages\SMSMessage" namespace="Eduzz\ContactCenter\Messages">
-          <metrics complexity="9" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="27" coveredelements="27"/>
+          <metrics complexity="10" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="29" coveredelements="29"/>
         </class>
-        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="19" type="stmt" count="5"/>
-        <line num="21" type="stmt" count="5"/>
-        <line num="22" type="stmt" count="5"/>
-        <line num="23" type="stmt" count="5"/>
-        <line num="25" type="method" name="params" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="26" type="stmt" count="4"/>
-        <line num="27" type="stmt" count="4"/>
-        <line num="30" type="method" name="to" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="31" type="stmt" count="4"/>
-        <line num="32" type="stmt" count="4"/>
-        <line num="35" type="method" name="prepareData" visibility="private" complexity="4" crap="4" count="4"/>
-        <line num="36" type="stmt" count="4"/>
-        <line num="38" type="stmt" count="4"/>
-        <line num="39" type="stmt" count="4"/>
-        <line num="41" type="stmt" count="4"/>
-        <line num="42" type="stmt" count="4"/>
-        <line num="44" type="stmt" count="4"/>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="19" type="stmt" count="6"/>
+        <line num="21" type="stmt" count="6"/>
+        <line num="22" type="stmt" count="6"/>
+        <line num="23" type="stmt" count="6"/>
+        <line num="25" type="method" name="params" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="26" type="stmt" count="5"/>
+        <line num="27" type="stmt" count="5"/>
+        <line num="30" type="method" name="to" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="31" type="stmt" count="5"/>
+        <line num="32" type="stmt" count="5"/>
+        <line num="35" type="method" name="prepareData" visibility="private" complexity="4" crap="4" count="5"/>
+        <line num="36" type="stmt" count="5"/>
+        <line num="38" type="stmt" count="5"/>
+        <line num="39" type="stmt" count="5"/>
+        <line num="41" type="stmt" count="5"/>
+        <line num="42" type="stmt" count="5"/>
+        <line num="44" type="stmt" count="5"/>
         <line num="45" type="stmt" count="1"/>
-        <line num="47" type="stmt" count="4"/>
-        <line num="50" type="method" name="send" visibility="public" complexity="2" crap="2" count="4"/>
-        <line num="53" type="stmt" count="4"/>
-        <line num="54" type="stmt" count="4"/>
-        <line num="56" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="5"/>
+        <line num="50" type="method" name="send" visibility="public" complexity="3" crap="3" count="5"/>
+        <line num="53" type="stmt" count="5"/>
+        <line num="54" type="stmt" count="5"/>
+        <line num="56" type="stmt" count="5"/>
         <line num="59" type="stmt" count="2"/>
-        <line num="61" type="stmt" count="2"/>
-        <line num="63" type="stmt" count="2"/>
-        <metrics loc="68" ncloc="68" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="27" coveredelements="27"/>
+        <line num="61" type="stmt" count="3"/>
+        <line num="63" type="stmt" count="3"/>
+        <line num="64" type="stmt" count="1"/>
+        <line num="66" type="stmt" count="2"/>
+        <metrics loc="71" ncloc="71" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="24" elements="29" coveredelements="29"/>
       </file>
     </package>
     <package name="Eduzz\ContactCenter\Traits">
@@ -383,6 +394,6 @@
         <metrics loc="39" ncloc="39" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
       </file>
     </package>
-    <metrics files="17" loc="783" ncloc="749" classes="12" methods="51" coveredmethods="51" conditionals="0" coveredconditionals="0" statements="217" coveredstatements="217" elements="268" coveredelements="268"/>
+    <metrics files="17" loc="800" ncloc="766" classes="12" methods="52" coveredmethods="52" conditionals="0" coveredconditionals="0" statements="227" coveredstatements="227" elements="279" coveredelements="279"/>
   </project>
 </coverage>

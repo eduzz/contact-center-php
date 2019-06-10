@@ -132,6 +132,31 @@ class SMSMessageTest extends TestCase
 
     }
 
+    public function testExceptionWhenAPIIsDownWithCustomCallback()
+    {
+      
+      $this->mockClientHttp(500, json_encode([
+        'error' => true, 
+        'code' => 200,
+        'message' => 'Erro de validacao'
+      ]));
+      $context = $this;
+
+      $smsMessage = new SMSMessage($this->clientHttp);
+
+      $response = $smsMessage->to([
+        (new Phone('+55', '15', '999999999'))
+      ])
+      ->params([
+        'nome' => 'PHPUnit'
+      ])
+      ->onError(function ($ex, $data) use ($context) {
+        $context->assertTrue(true);
+      })
+      ->template('tetetetetete')
+      ->send();
+    }
+
     public function tearDown()
     {
 

@@ -58,6 +58,9 @@ class EmailMessageTest extends TestCase
         'nome' => 'PHPUnit'
       ])
       ->subject('Teste feito pelo PHPUnit')
+      ->onError(function($e) {
+        echo "Erro encontrado";
+      })
       ->template('tetetetetete')
       ->metadata([
         '_id' => '99999'
@@ -133,7 +136,7 @@ class EmailMessageTest extends TestCase
 
     }
 
-    public function testExceptionWhenAPIIsDown()
+    public function testExceptionWhenAPIIsDownWithNoCustomCallback()
     {
       
       $this->expectException(UnexpectedApiException::class);
@@ -143,6 +146,8 @@ class EmailMessageTest extends TestCase
         'code' => 200,
         'message' => 'Erro de validacao'
       ]));
+
+      $called = false;
 
       $emailMessage = new EmailMessage($this->clientHttp);
 
@@ -162,6 +167,46 @@ class EmailMessageTest extends TestCase
       ])
       ->subject('Teste feito pelo PHPUnit')
       ->send();
+
+    }
+
+    public function testExceptionWhenAPIIsDownWithCustomCallback()
+    {
+      
+      //$this->expectException(UnexpectedApiException::class);
+      $eumes = $this;
+      $this->mockClientHttp(500, json_encode([
+        'error' => true, 
+        'code' => 200,
+        'message' => 'Erro de validacao'
+      ]));
+
+      $called = false;
+
+      $emailMessage = new EmailMessage($this->clientHttp);
+
+      $response = $emailMessage->to([
+        (new Person('teste@unitario.com', 'Teste Unitario'))->toArray()
+      ])
+      ->from('phpunit@php.com', 'PHPUnit')
+      ->cc([
+        (new Person('teste@unitario.com', 'Teste Unitario'))->toArray()
+      ])
+      ->bcc([
+        (new Person('teste@unitario.com', 'Teste Unitario'))->toArray()
+      ])
+      ->replyTo('teste@phpunit.com', 'Teste')
+      ->params([
+        'nome' => 'PHPUnit'
+      ])
+      ->onError(function ($e, $data) use ($eumes)  {
+        $called = true;
+        $eumes->assertNotEmpty($e->getMessage());
+        $eumes->assertTrue($called);
+      })
+      ->subject('Teste feito pelo PHPUnit')
+      ->send();
+
 
     }
 

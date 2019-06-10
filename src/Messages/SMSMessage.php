@@ -60,6 +60,9 @@ class SMSMessage extends Message
 
     } catch (GuzzleException $e) {
       
+      if ($this->callbackError)
+        return $this->callbackError->call($this, $e, $this->prepareData());
+
       throw $this->formatException($e);
 
     }
