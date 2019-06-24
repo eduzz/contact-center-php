@@ -5,31 +5,24 @@ namespace Eduzz\ContactCenter;
 use Eduzz\ContactCenter\Managers\DeliveryManager;
 use Eduzz\ContactCenter\Managers\EmailTemplateManager;
 use Eduzz\ContactCenter\Managers\SMSTemplateManager;
-use GuzzleHttp\Client;
+use Eduzz\ContactCenter\Managers\ReportManager;
 use Eduzz\ContactCenter\Messages\EmailMessage;
 use Eduzz\ContactCenter\Messages\SMSMessage;
+use GuzzleHttp\Client;
 
 class ContactCenter
 {
 
   private $config;
-
   private $clientHttp;
-
   private $deliveryManager;
-
+  private $reportManager;
   private $emailTemplateManager;
-
   private $smsTemplateManager;
 
   public function __construct($config = null)
   {
     $this->config = (object)$config;
-
-    $this->deliveryManager = $this->initDeliveryManager();
-    $this->emailTemplateManager = $this->initEmailTemplateManager();
-    $this->smsTemplateManager = $this->initSMSTemplateManager();
-
     $this->clientHttp = $this->getClientHttp();
   }
 
@@ -54,18 +47,55 @@ class ContactCenter
     return $manager;
   }
 
+  private function initReportManager()
+  {
+    $manager = new ReportManager($this->getClientHttp());
+    $manager->setConfig($this->config);
+    return $manager;
+  }
+
+  private function getClientHttp()
+    {
+      if (!$this->clientHttp)
+        $this->clientHttp = new Client([ 
+          'headers' => [
+            'applicationKey' => $this->config->applicationKey
+          ]
+        ]);
+  
+      return $this->clientHttp;
+    }
+
   public function delivery()
   {
+    if (!$this->deliveryManager)
+      $this->deliveryManager = $this->initDeliveryManager();
+
     return $this->deliveryManager;
+  }
+
+  public function reports()
+  {
+    if (!$this->reportManager)
+      $this->reportManager = $this->initReportManager();
+
+    return $this->reportManager;
   }
 
   public function smsTemplates()
   {
+    if (!$this->smsTemplateManager)
+    
+      $this->smsTemplateManager = $this->initSMSTemplateManager();
+
     return $this->smsTemplateManager;
   }
 
   public function emailTemplates()
   {
+    if (!$this->emailTemplateManager)
+      $this->emailTemplateManager = $this->initEmailTemplateManager();
+
     return $this->emailTemplateManager;
   }
 
@@ -81,18 +111,6 @@ class ContactCenter
     $smsMessage = new SMSMessage($this->clientHttp);
     $smsMessage->setConfig($this->config);
     return $smsMessage;
-  }
-
-  private function getClientHttp()
-  {
-    if (!$this->clientHttp)
-      $this->clientHttp = new Client([ 
-        'headers' => [
-          'applicationKey' => $this->config->applicationKey
-        ]
-      ]);
-
-    return $this->clientHttp;
   }
 
 }
