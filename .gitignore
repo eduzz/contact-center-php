@@ -1,4 +1,3 @@
 /vendor/
 /tests/_reports
 /test-lib
-composer.lock
