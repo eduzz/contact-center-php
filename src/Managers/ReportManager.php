@@ -2,6 +2,9 @@
 
 namespace Eduzz\ContactCenter\Managers;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+
 use Eduzz\ContactCenter\Traits\Configuration;
 use Eduzz\ContactCenter\Entities\GetDeliveriesEmailFilter;
 use Eduzz\ContactCenter\Entities\GetDeliveriesSMSFilter;
@@ -11,20 +14,18 @@ class ReportManager extends Manager
 
   use Configuration;
 
-  public function __construct() {
-    // Constructor 
+  public function __construct(Client $client) {
+    $this->client = $client;
   }
 
   public function getDeliveredEmail(GetDeliveriesEmailFilter $filter)
   {
     try {
-
+      
       $response = $this->client->request('GET', 
-                                        $this->config->baseUrl . '/deliveries/email', 
+                                        $this->config->baseUrl . '/reports/deliveries/email', 
                                         [
-                                          'json'=> [
-                                              $filter->get()
-                                            ]
+                                          'json'=> $filter->get()
                                         ]);
       return json_decode($response->getBody());
 
