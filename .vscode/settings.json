@@ -1,0 +1,7 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "phpfmt.enable_auto_align": true,
+  "php.suggest.basic": false
+}
