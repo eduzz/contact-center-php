@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "bmewburn.vscode-intelephense-client",
+    "felixfbecker.php-debug",
+    "neilbrayfield.php-docblocker",
+    "kokororin.vscode-phpfmt"
+  ]
+}

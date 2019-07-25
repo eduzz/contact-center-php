@@ -4,8 +4,8 @@ namespace Eduzz\ContactCenter\Managers;
 
 use Eduzz\ContactCenter\Traits\ExceptionFormatter;
 
-abstract class Manager 
+abstract class Manager
 {
-  use ExceptionFormatter;
+    use ExceptionFormatter;
 
 }
