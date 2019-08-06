@@ -2,6 +2,7 @@
 
 namespace Eduzz\ContactCenter\Messages;
 
+use Eduzz\ContactCenter\Entities\Person;
 use Eduzz\ContactCenter\Messages\Message;
 use Eduzz\ContactCenter\Traits\Configuration;
 use GuzzleHttp\Client;
