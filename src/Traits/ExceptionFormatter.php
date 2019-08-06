@@ -23,10 +23,15 @@ trait ExceptionFormatter
               return new UnexpectedApiException($exception->getMessage());
           }
 
+          $message = [
+            'message' => $responseBody->message,
+            'errors' => $responseBody->errors
+          ];
+
           if($code >= 400 && $code < 500) {
-              return new ValidationException($responseBody->message ?? 'Validation Error: empty message');
+              return new ValidationException(json_encode($message) ?? 'Validation Error: empty message');
           } else {
-              return new UnexpectedApiException($responseBody->message ?? 'Unexpected API Error: empty message');
+              return new UnexpectedApiException(json_encode($message) ?? 'Unexpected API Error: empty message');
           }
 
       } else {

@@ -23,7 +23,6 @@ class EmailMessage extends Message
   
   public function __construct(Client $clientHttp) {
     $this->clientHttp = $clientHttp; 
-    
     $this->from = null;
     $this->params = [];
     $this->subject = null;
@@ -34,7 +33,9 @@ class EmailMessage extends Message
   }
 
   public function to(array $to){
-    $this->to = $to;
+    array_map(function(Eduzz\ContactCenter\Entities\Person $person) {
+      $this->to[] = $person->toArray();
+    }, $to);
     return $this;
   }
 
@@ -80,6 +81,7 @@ class EmailMessage extends Message
   }
 
   private function prepareData() {
+
     $data['template_id'] = $this->template;
 
     if ($this->subject)
@@ -105,19 +107,21 @@ class EmailMessage extends Message
 
     if ($this->metadata)
       $data['_metadata'] = $this->metadata;
-
+    
     return $data;
   }
 
 
   public function send() {
     try {
-      
+
       $response = $this->clientHttp->request('POST', 
                                          $this->config->baseUrl . '/send/email',
                                         [
                                           'json' => $this->prepareData()
                                         ]);
+
+      echo json_encode($this->prepareData());
 
       return json_decode($response->getBody());
 
