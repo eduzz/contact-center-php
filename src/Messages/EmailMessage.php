@@ -34,7 +34,9 @@ class EmailMessage extends Message
   }
 
   public function to(array $to){
-    $this->to = $to;
+    array_map(function(Person $person) {
+      $this->to[] = $person->toArray();
+    }, $to);
     return $this;
   }
 
