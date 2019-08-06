@@ -5,38 +5,38 @@ namespace Eduzz\ContactCenter\Managers;
 use Eduzz\ContactCenter\Messages\Message;
 use Eduzz\ContactCenter\Traits\Configuration;
 
-
 class DeliveryManager extends Manager
 {
-  
-  use Configuration;
 
-  private $messages;
+    use Configuration;
 
-  public function __construct() {
-    
-  }
+    private $messages;
 
-  public function send(Message $message = null) 
-  {
-    if ($message){
-      $message->send();
-      return;
+    public function __construct()
+    {
+
     }
 
-    foreach($this->messages as $message) {
-      $message->send();
+    public function send(Message $message = null)
+    {
+        if ($message) {
+            $message->send();
+            return;
+        }
+
+        foreach ($this->messages as $message) {
+            $message->send();
+        }
     }
-  }
 
-  public function addMessage(Message $message) 
-  {
-    $this->messages[] = $message;
-  }
+    public function addMessage(Message $message)
+    {
+        $this->messages[] = $message;
+    }
 
-  public function clear() 
-  {
-    $this->messages = [];
-  }
+    public function clear()
+    {
+        $this->messages = [];
+    }
 
 }

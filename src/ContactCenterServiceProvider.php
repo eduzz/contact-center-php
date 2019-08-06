@@ -13,7 +13,7 @@ class ContactCenterServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-            __DIR__ . '/Config/contactcenter.php' => $this->getConfigPath('contactcenter.php'),
+                __DIR__ . '/Config/contactcenter.php' => $this->getConfigPath('contactcenter.php'),
             ], 'config'
         );
     }
@@ -21,9 +21,9 @@ class ContactCenterServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('Eduzz\ContactCenter\ContactCenter', function ($app) {
-                $contactCenter = new ContactCenter($this->getConfiguration());
-                return $contactCenter;
-            }
+            $contactCenter = new ContactCenter($this->getConfiguration());
+            return $contactCenter;
+        }
         );
     }
 
@@ -33,7 +33,8 @@ class ContactCenterServiceProvider extends ServiceProvider
      * @param string $path
      * @return string
      */
-    private function getConfigPath($path = '') {
+    private function getConfigPath($path = '')
+    {
         return $this->app->basePath() . '/config' . ($path ? '/' . $path : $path);
     }
 

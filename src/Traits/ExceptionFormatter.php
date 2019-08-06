@@ -2,44 +2,39 @@
 
 namespace Eduzz\ContactCenter\Traits;
 
-use GuzzleHttp\Exception\BadResponseException;
 use Eduzz\ContactCenter\Exceptions\UnexpectedApiException;
 use Eduzz\ContactCenter\Exceptions\ValidationException;
+use GuzzleHttp\Exception\BadResponseException;
 
 trait ExceptionFormatter
 {
-  protected function formatException($exception)
-  {
-    
-    if($exception instanceof BadResponseException) {
-      
-      if($exception->hasResponse()) {
-          $response = $exception->getResponse();
+ protected function formatException($exception)
+ {
 
-          $code = $response->getStatusCode();
-          $responseBody = json_decode($response->getBody());
+  if ($exception instanceof BadResponseException) {
 
-          if(!$responseBody) {
-              return new UnexpectedApiException($exception->getMessage());
-          }
+   if ($exception->hasResponse()) {
+    $response = $exception->getResponse();
 
-          $message = [
-            'message' => $responseBody->message,
-            'errors' => $responseBody->errors
-          ];
+    $code         = $response->getStatusCode();
+    $responseBody = json_decode($response->getBody());
 
-          if($code >= 400 && $code < 500) {
-              return new ValidationException(json_encode($message) ?? 'Validation Error: empty message');
-          } else {
-              return new UnexpectedApiException(json_encode($message) ?? 'Unexpected API Error: empty message');
-          }
+    if (!$responseBody) {
+     return new UnexpectedApiException($exception->getMessage());
+    }
 
-      } else {
-          return new UnexpectedApiException($exception->getMessage());
-      }
-  } else {
+    if ($code >= 400 && $code < 500) {
+     return new ValidationException($responseBody->message ?? 'Validation Error: empty message');
+    } else {
+     return new UnexpectedApiException($responseBody->message ?? 'Unexpected API Error: empty message');
+    }
+
+   } else {
     return new UnexpectedApiException($exception->getMessage());
+   }
+  } else {
+   return new UnexpectedApiException($exception->getMessage());
   }
 
-  }
+ }
 }

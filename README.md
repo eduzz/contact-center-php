@@ -76,7 +76,7 @@ Para realizar o envio de email simples utilize a seguinte estrutura:
         ->createEmailMessage() //Cria mensagem de email
         ->to(new Person('email@dominio.com.br', 'Nome do destinatario')) // Destinatario
         ->from('no-reply@dominio.com', 'Nome da empresa') // Remetente
-        ->templateId('HRGJJDIISIW3424') // fornecido pela equipe 
+        ->template('HRGJJDIISIW3424') // fornecido pela equipe 
         ->params([
             'saudacao' => 'Olá ContactCenter',
             'link_acesso'=> 'http://github.com'
