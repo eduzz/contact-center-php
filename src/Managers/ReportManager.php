@@ -22,17 +22,17 @@ class ReportManager extends Manager
     {
         try {
 
-            $response = $this->client->request('GET',
-                $this->config->baseUrl . '/reports/deliveries/email',
+            $response = $this->client->request(
+                'GET',
+                $this->config->baseUrl . '/reports/email/deliveries',
                 [
                     'json' => $filter->get(),
-                ]);
+                ]
+            );
             return json_decode($response->getBody());
-
         } catch (GuzzleException $e) {
 
             throw $this->formatException($e);
-
         }
     }
 
@@ -40,21 +40,19 @@ class ReportManager extends Manager
     {
         try {
 
-            $response = $this->client->request('GET',
+            $response = $this->client->request(
+                'GET',
                 $this->config->baseUrl . '/deliveries/sms',
                 [
                     'json' => [
                         $filter->get(),
                     ],
-                ]);
+                ]
+            );
             return json_decode($response->getBody());
-
         } catch (GuzzleException $e) {
 
             throw $this->formatException($e);
-
         }
-
     }
-
 }
