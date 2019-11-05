@@ -25,13 +25,10 @@ class EmailMessageTest extends TestCase
         $this->clientHttp = new Client(['handler' => $mockHandler, 'headers' => [
             'applicationKey' => 'teste',
         ]]);
-
     }
 
     public function setUp()
-    {
-
-    }
+    { }
 
     public function testSendWithoutScheduleField()
     {
@@ -44,7 +41,7 @@ class EmailMessageTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $response = $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -68,7 +65,6 @@ class EmailMessageTest extends TestCase
             ->send();
 
         $this->assertEquals('hash', $response->_id);
-
     }
 
     public function testSendWithScheduleField()
@@ -82,7 +78,7 @@ class EmailMessageTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $response = $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -100,7 +96,6 @@ class EmailMessageTest extends TestCase
             ->send();
 
         $this->assertEquals('hash', $response->_id);
-
     }
 
     public function testValidationExceptionOnCallAPI()
@@ -117,7 +112,7 @@ class EmailMessageTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $response = $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -132,7 +127,6 @@ class EmailMessageTest extends TestCase
             ])
             ->subject('Teste feito pelo PHPUnit')
             ->send();
-
     }
 
     public function testExceptionWhenAPIIsDownWithNoCustomCallback()
@@ -151,7 +145,7 @@ class EmailMessageTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $response = $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -166,7 +160,6 @@ class EmailMessageTest extends TestCase
             ])
             ->subject('Teste feito pelo PHPUnit')
             ->send();
-
     }
 
     public function testExceptionWhenAPIIsDownWithCustomCallback()
@@ -185,7 +178,7 @@ class EmailMessageTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $response = $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -205,12 +198,8 @@ class EmailMessageTest extends TestCase
             })
             ->subject('Teste feito pelo PHPUnit')
             ->send();
-
     }
 
     public function tearDown()
-    {
-
-    }
-
+    { }
 }

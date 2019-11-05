@@ -22,14 +22,10 @@ class ExceptionsTest extends TestCase
     use ExceptionFormatter;
 
     public function setUp()
-    {
-
-    }
+    { }
 
     public function tearDown()
-    {
-
-    }
+    { }
 
     private function mockClientHttp($code, $desireResponse)
     {
@@ -53,7 +49,7 @@ class ExceptionsTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -68,7 +64,6 @@ class ExceptionsTest extends TestCase
             ])
             ->subject('Teste feito pelo PHPUnit')
             ->send();
-
     }
 
     public function testTreatmentForBadRequestsWithoutResponse()
@@ -86,7 +81,7 @@ class ExceptionsTest extends TestCase
         $emailMessage = new EmailMessage($this->clientHttp);
 
         $emailMessage->to([
-            (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            (new Person('teste@unitario.com', 'Teste Unitario')),
         ])
             ->from('phpunit@php.com', 'PHPUnit')
             ->cc([
@@ -101,7 +96,6 @@ class ExceptionsTest extends TestCase
             ])
             ->subject('Teste feito pelo PHPUnit')
             ->send();
-
     }
 
     public function testGetJSONErrorPresentation()
@@ -113,5 +107,4 @@ class ExceptionsTest extends TestCase
         $this->assertEquals(200, $json->code);
         $this->assertEquals('Teste de apresentacao do exception', $json->message);
     }
-
 }
