@@ -2,6 +2,7 @@
 
 namespace Eduzz\ContactCenter\Messages;
 
+use Eduzz\ContactCenter\Entities\Phone;
 use Eduzz\ContactCenter\Traits\Configuration;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -30,7 +31,9 @@ class SMSMessage extends Message
 
     public function to(array $to)
     {
-        $this->to = $to;
+        array_map(function (Phone $phone) {
+            $this->to[] = $phone->toArray();
+        }, $to);
         return $this;
     }
 
@@ -57,14 +60,15 @@ class SMSMessage extends Message
     {
         try {
 
-            $response = $this->clientHttp->request('POST',
+            $response = $this->clientHttp->request(
+                'POST',
                 $this->config->baseUrl . '/send/sms',
                 [
                     'json' => $this->prepareData(),
-                ]);
+                ]
+            );
 
             return json_decode($response->getBody());
-
         } catch (GuzzleException $e) {
 
             if ($this->callbackError) {
@@ -72,9 +76,6 @@ class SMSMessage extends Message
             }
 
             throw $this->formatException($e);
-
         }
-
     }
-
 }
