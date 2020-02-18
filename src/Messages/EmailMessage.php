@@ -3,6 +3,7 @@
 namespace Eduzz\ContactCenter\Messages;
 
 use Eduzz\ContactCenter\Entities\Person;
+use Eduzz\ContactCenter\Entities\Postback;
 use Eduzz\ContactCenter\Messages\Message;
 use Eduzz\ContactCenter\Traits\Configuration;
 use GuzzleHttp\Client;
@@ -20,18 +21,20 @@ class EmailMessage extends Message
     private $from;
     private $params;
     private $subject;
+    private $postback;
 
     public function __construct(Client $clientHttp)
     {
         $this->clientHttp = $clientHttp;
 
-        $this->from    = null;
-        $this->params  = [];
-        $this->subject = null;
-        $this->to      = [];
-        $this->cc      = [];
-        $this->bcc     = [];
-        $this->replyTo = null;
+        $this->from     = null;
+        $this->params   = [];
+        $this->subject  = null;
+        $this->to       = [];
+        $this->cc       = [];
+        $this->bcc      = [];
+        $this->replyTo  = null;
+        $this->postback = null;
     }
 
     public function to(array $to)
@@ -90,6 +93,12 @@ class EmailMessage extends Message
         return $this;
     }
 
+    public function postback(Postback $postback)
+    {
+        $this->postback = $postback->toArray();
+        return $this;
+    }
+
     private function prepareData()
     {
         $data['template_id'] = $this->template;
@@ -124,6 +133,10 @@ class EmailMessage extends Message
 
         if ($this->metadata) {
             $data['_metadata'] = $this->metadata;
+        }
+
+        if ($this->postback) {
+            $data['postback'] = $this->postback;
         }
 
         return $data;
