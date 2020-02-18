@@ -19,4 +19,4 @@ WORKDIR /src
 
 COPY docker/test/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-CMD /bin/bash
+CMD tail -f /src/composer.json

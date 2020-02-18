@@ -44,7 +44,7 @@ class SMSMessageTest extends TestCase
         $smsMessage = new SMSMessage($this->clientHttp);
 
         $response = $smsMessage->to([
-            (new Phone('+55', '15', '999999999'))->toArray(),
+            (new Phone('+55', '15', '999999999')),
         ])
             ->params([
                 'nome' => 'PHPUnit',
