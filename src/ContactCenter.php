@@ -103,7 +103,7 @@ class ContactCenter
         return $this->emailTemplateManager;
     }
 
-    public function createEmailMessage() : EmailMessage
+    public function createEmailMessage()
     {
         $emailMessage = new EmailMessage($this->clientHttp);
         $emailMessage->setConfig($this->config);
