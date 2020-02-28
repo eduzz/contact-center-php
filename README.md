@@ -90,6 +90,27 @@ Para realizar o envio de email simples utilize a seguinte estrutura:
         ->send();
 ```
 
+Agora, tem um novo recurso implementado, em que você também, em uma única requisição (método send() do EmailMessage) é possível mandar, vários emails com parâmetros diferentes para cada usuário.
+
+```php
+    $contaccenter
+        ->createEmailMessage() //Cria mensagem de email
+        ->to(new Person('email@dominio.com.br', 
+                        'Nome do destinatario', 
+                        ['mensagem'=> 'Olá destinatario'])) // Destinatario com parametros opcionais
+        ->from('no-reply@dominio.com', 'Nome da empresa') // Remetente
+        ->template('HRGJJDIISIW3424') // fornecido pela equipe
+        ->params(['mensagem' => 'Olá fulano']) // será substituido pelo parametro passado no usuário 
+        ->metadata([
+            'track_id' => '123'
+        ]) // Usado para colocar qualquer informação relevante para rastreio
+        ->onError(function($e) {
+            echo "Envio de email não realizado" . $e->getMessage()
+        }) // Suprime o erro dentro de uma rotina de fallback
+        ->send();
+```
+
+
 Para realizar o envio de vários e-mails simultaneamente, recomendamos a utilizacao do **DeliveryManager**
 
 ```php
