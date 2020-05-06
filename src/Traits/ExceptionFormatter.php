@@ -24,9 +24,9 @@ trait ExceptionFormatter
                 }
 
                 if ($code >= 400 && $code < 500) {
-                    return new ValidationException($responseBody->message ?? 'Validation Error: empty message');
+                    return new ValidationException($exception->getMessage() ?? 'Validation Error: ' . $response);
                 } else {
-                    return new UnexpectedApiException($responseBody->message ?? 'Unexpected API Error: empty message');
+                    return new UnexpectedApiException($exception->getMessage() ?? 'Unexpected API Error: ' . $response);
                 }
             } else {
                 return new UnexpectedApiException($exception->getMessage());
