@@ -2,7 +2,9 @@
 
 namespace Eduzz\ContactCenter\Entities;
 
-class Postback
+use JsonSerializable;
+
+class Postback implements JsonSerializable
 {
     private $method;
     private $url;
@@ -13,6 +15,11 @@ class Postback
         $this->method = $method;
         $this->url  = $url;
         $this->headers  = $headers;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     public function toArray()

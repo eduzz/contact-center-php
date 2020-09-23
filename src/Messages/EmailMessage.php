@@ -37,11 +37,12 @@ class EmailMessage extends Message
         $this->postback = null;
     }
 
+    /**
+     * @param Person[] $to
+     */
     public function to(array $to)
     {
-        array_map(function (Person $person) {
-            $this->to[] = $person->toArray();
-        }, $to);
+        $this->to = array_merge($this->to, $to);
         return $this;
     }
 
@@ -95,7 +96,7 @@ class EmailMessage extends Message
 
     public function postback(Postback $postback)
     {
-        $this->postback = $postback->toArray();
+        $this->postback = $postback;
         return $this;
     }
 

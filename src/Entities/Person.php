@@ -2,7 +2,9 @@
 
 namespace Eduzz\ContactCenter\Entities;
 
-class Person
+use JsonSerializable;
+
+class Person implements JsonSerializable
 {
     private $name;
     private $email;
@@ -13,6 +15,11 @@ class Person
         $this->email = $email;
         $this->name  = $name;
         $this->params = $params;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     public function toArray()
