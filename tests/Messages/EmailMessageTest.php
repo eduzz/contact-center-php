@@ -202,10 +202,13 @@ class EmailMessageTest extends TestCase
 
     public function testSendAsyncWithoutScheduleField()
     {
-
         $this->mockClientHttp(200, json_encode([
-            'subject' => 'Enviado com sucesso',
-            '_id'     => 'hash',
+            'success'  => true,
+            'status'   => 'sending',
+            'track_id' => 'trackId',
+            'count'    => 1,
+            'emails'   => ['teste@unitario.com'],
+            'invalids' => [],
         ]));
 
         $emailMessage = new EmailMessage($this->clientHttp);
@@ -234,15 +237,23 @@ class EmailMessageTest extends TestCase
             ])
             ->asyncSend();
 
-        $this->assertEquals('hash', $response->_id);
+        $this->assertTrue($response->success);
+        $this->assertEquals('sending', $response->status);
+        $this->assertEquals('trackId', $response->track_id);
+        $this->assertEquals(1, $response->count);
+        $this->assertEquals('teste@unitario.com', $response->emails[0]);
+        $this->assertCount(0, $response->invalids);
     }
 
     public function testSendAsyncWithScheduleField()
     {
-
         $this->mockClientHttp(200, json_encode([
-            'subject' => 'Enviado com sucesso',
-            '_id'     => 'hash',
+            'success'  => true,
+            'status'   => 'sending',
+            'track_id' => 'trackId',
+            'count'    => 1,
+            'emails'   => ['teste@unitario.com'],
+            'invalids' => [],
         ]));
 
         $emailMessage = new EmailMessage($this->clientHttp);
@@ -265,7 +276,12 @@ class EmailMessageTest extends TestCase
             ->schedule(time())
             ->asyncSend();
 
-        $this->assertEquals('hash', $response->_id);
+        $this->assertTrue($response->success);
+        $this->assertEquals('sending', $response->status);
+        $this->assertEquals('trackId', $response->track_id);
+        $this->assertEquals(1, $response->count);
+        $this->assertEquals('teste@unitario.com', $response->emails[0]);
+        $this->assertCount(0, $response->invalids);
     }
 
     public function testValidationExceptionOnCallAPIAsync()
@@ -334,7 +350,6 @@ class EmailMessageTest extends TestCase
 
     public function testExceptionWhenAPIIsDownWithCustomCallbackAsync()
     {
-
         //$this->expectException(UnexpectedApiException::class);
         $eumes = $this;
         $this->mockClientHttp(500, json_encode([
