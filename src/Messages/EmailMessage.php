@@ -164,4 +164,27 @@ class EmailMessage extends Message
             throw $this->formatException($e);
         }
     }
+
+    public function asyncSend()
+    {
+        try {
+
+            $response = $this->clientHttp->request(
+                'POST',
+                $this->config->baseUrl . '/send/async-email',
+                [
+                    'json' => $this->prepareData(),
+                ]
+            );
+
+            return json_decode($response->getBody());
+        } catch (GuzzleException $e) {
+
+            if ($this->callbackError) {
+                return $this->callbackError->call($this, $e, $this->prepareData());
+            }
+
+            throw $this->formatException($e);
+        }
+    }
 }

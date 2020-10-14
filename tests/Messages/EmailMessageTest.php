@@ -28,7 +28,7 @@ class EmailMessageTest extends TestCase
     }
 
     public function setUp()
-    { }
+    {}
 
     public function testSendWithoutScheduleField()
     {
@@ -200,6 +200,191 @@ class EmailMessageTest extends TestCase
             ->send();
     }
 
+    public function testSendAsyncWithoutScheduleField()
+    {
+        $this->mockClientHttp(200, json_encode([
+            'success'  => true,
+            'status'   => 'sending',
+            'track_id' => 'trackId',
+            'count'    => 1,
+            'emails'   => ['teste@unitario.com'],
+            'invalids' => [],
+        ]));
+
+        $emailMessage = new EmailMessage($this->clientHttp);
+
+        $response = $emailMessage->to([
+            (new Person('teste@unitario.com', 'Teste Unitario')),
+        ])
+            ->from('phpunit@php.com', 'PHPUnit')
+            ->cc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->bcc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->replyTo('teste@phpunit.com', 'Teste')
+            ->params([
+                'nome' => 'PHPUnit',
+            ])
+            ->subject('Teste feito pelo PHPUnit')
+            ->onError(function ($e) {
+                echo "Erro encontrado";
+            })
+            ->template('tetetetetete')
+            ->metadata([
+                '_id' => '99999',
+            ])
+            ->asyncSend();
+
+        $this->assertTrue($response->success);
+        $this->assertEquals('sending', $response->status);
+        $this->assertEquals('trackId', $response->track_id);
+        $this->assertEquals(1, $response->count);
+        $this->assertEquals('teste@unitario.com', $response->emails[0]);
+        $this->assertCount(0, $response->invalids);
+    }
+
+    public function testSendAsyncWithScheduleField()
+    {
+        $this->mockClientHttp(200, json_encode([
+            'success'  => true,
+            'status'   => 'sending',
+            'track_id' => 'trackId',
+            'count'    => 1,
+            'emails'   => ['teste@unitario.com'],
+            'invalids' => [],
+        ]));
+
+        $emailMessage = new EmailMessage($this->clientHttp);
+
+        $response = $emailMessage->to([
+            (new Person('teste@unitario.com', 'Teste Unitario')),
+        ])
+            ->from('phpunit@php.com', 'PHPUnit')
+            ->cc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->bcc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->replyTo('teste@phpunit.com', 'Teste')
+            ->params([
+                'nome' => 'PHPUnit',
+            ])
+            ->subject('Teste feito pelo PHPUnit')
+            ->schedule(time())
+            ->asyncSend();
+
+        $this->assertTrue($response->success);
+        $this->assertEquals('sending', $response->status);
+        $this->assertEquals('trackId', $response->track_id);
+        $this->assertEquals(1, $response->count);
+        $this->assertEquals('teste@unitario.com', $response->emails[0]);
+        $this->assertCount(0, $response->invalids);
+    }
+
+    public function testValidationExceptionOnCallAPIAsync()
+    {
+
+        $this->expectException(ValidationException::class);
+
+        $this->mockClientHttp(400, json_encode([
+            'error'   => true,
+            'code'    => 100,
+            'message' => 'Erro de validacao',
+        ]));
+
+        $emailMessage = new EmailMessage($this->clientHttp);
+
+        $response = $emailMessage->to([
+            (new Person('teste@unitario.com', 'Teste Unitario')),
+        ])
+            ->from('phpunit@php.com', 'PHPUnit')
+            ->cc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->bcc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->replyTo('teste@phpunit.com', 'Teste')
+            ->params([
+                'nome' => 'PHPUnit',
+            ])
+            ->subject('Teste feito pelo PHPUnit')
+            ->asyncSend();
+    }
+
+    public function testExceptionWhenAPIIsDownWithNoCustomCallbackAsync()
+    {
+
+        $this->expectException(UnexpectedApiException::class);
+
+        $this->mockClientHttp(500, json_encode([
+            'error'   => true,
+            'code'    => 200,
+            'message' => 'Erro de validacao',
+        ]));
+
+        $called = false;
+
+        $emailMessage = new EmailMessage($this->clientHttp);
+
+        $response = $emailMessage->to([
+            (new Person('teste@unitario.com', 'Teste Unitario')),
+        ])
+            ->from('phpunit@php.com', 'PHPUnit')
+            ->cc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->bcc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->replyTo('teste@phpunit.com', 'Teste')
+            ->params([
+                'nome' => 'PHPUnit',
+            ])
+            ->subject('Teste feito pelo PHPUnit')
+            ->asyncSend();
+    }
+
+    public function testExceptionWhenAPIIsDownWithCustomCallbackAsync()
+    {
+        //$this->expectException(UnexpectedApiException::class);
+        $eumes = $this;
+        $this->mockClientHttp(500, json_encode([
+            'error'   => true,
+            'code'    => 200,
+            'message' => 'Erro de validacao',
+        ]));
+
+        $called = false;
+
+        $emailMessage = new EmailMessage($this->clientHttp);
+
+        $response = $emailMessage->to([
+            (new Person('teste@unitario.com', 'Teste Unitario')),
+        ])
+            ->from('phpunit@php.com', 'PHPUnit')
+            ->cc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->bcc([
+                (new Person('teste@unitario.com', 'Teste Unitario'))->toArray(),
+            ])
+            ->replyTo('teste@phpunit.com', 'Teste')
+            ->params([
+                'nome' => 'PHPUnit',
+            ])
+            ->onError(function ($e, $data) use ($eumes) {
+                $called = true;
+                $eumes->assertNotEmpty($e->getMessage());
+                $eumes->assertTrue($called);
+            })
+            ->subject('Teste feito pelo PHPUnit')
+            ->asyncSend();
+    }
+
     public function tearDown()
-    { }
+    {}
 }
