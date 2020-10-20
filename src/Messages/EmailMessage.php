@@ -157,15 +157,13 @@ class EmailMessage extends Message
     {
         try {
 
-            print_r($this->prepareData());
-
             $response = $this->clientHttp->request(
                 'POST',
                 $this->config->baseUrl . '/send/email',
                 [
                     'json' => $this->prepareData(),
                 ]
-                );
+            );
 
             return json_decode($response->getBody());
         } catch (GuzzleException $e) {
