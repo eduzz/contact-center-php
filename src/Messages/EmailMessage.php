@@ -39,7 +39,7 @@ class EmailMessage extends Message
         $this->priority = 'medium';
     }
 
-    public function to($to)
+    public function to(array $to)
     {
         array_map(function (Person $person) {
             $this->to[] = $person->toArray();
