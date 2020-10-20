@@ -22,6 +22,7 @@ class EmailMessage extends Message
     private $params;
     private $subject;
     private $postback;
+    private $priority;
 
     public function __construct(Client $clientHttp)
     {
@@ -35,13 +36,15 @@ class EmailMessage extends Message
         $this->bcc      = [];
         $this->replyTo  = null;
         $this->postback = null;
+        $this->priority = 'medium';
     }
 
-    public function to(array $to)
+    public function to($to)
     {
         array_map(function (Person $person) {
             $this->to[] = $person->toArray();
         }, $to);
+        
         return $this;
     }
 
@@ -99,6 +102,12 @@ class EmailMessage extends Message
         return $this;
     }
 
+    public function priority(string $priority = 'medium')
+    {
+        $this->priority = $priority;
+        return $this;
+    }
+
     private function prepareData()
     {
         $data['template_id'] = $this->template;
@@ -139,6 +148,8 @@ class EmailMessage extends Message
             $data['postback'] = $this->postback;
         }
 
+        $data['priority'] = $this->priority;
+
         return $data;
     }
 
@@ -146,13 +157,15 @@ class EmailMessage extends Message
     {
         try {
 
+            print_r($this->prepareData());
+
             $response = $this->clientHttp->request(
                 'POST',
                 $this->config->baseUrl . '/send/email',
                 [
                     'json' => $this->prepareData(),
                 ]
-            );
+                );
 
             return json_decode($response->getBody());
         } catch (GuzzleException $e) {
