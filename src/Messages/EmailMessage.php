@@ -6,6 +6,8 @@ use Eduzz\ContactCenter\Entities\Person;
 use Eduzz\ContactCenter\Entities\Postback;
 use Eduzz\ContactCenter\Messages\Message;
 use Eduzz\ContactCenter\Traits\Configuration;
+use Eduzz\ContactCenter\Consts\EmailPriorityType;
+use Eduzz\ContactCenter\Exceptions\ValidationException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -36,7 +38,7 @@ class EmailMessage extends Message
         $this->bcc      = [];
         $this->replyTo  = null;
         $this->postback = null;
-        $this->priority = 'medium';
+        $this->priority = EmailPriorityType::MEDIUM;
     }
 
     public function to(array $to)
@@ -102,8 +104,12 @@ class EmailMessage extends Message
         return $this;
     }
 
-    public function priority(string $priority = 'medium')
+    public function priority(string $priority = EmailPriorityType::MEDIUM)
     {
+        if(!in_array($priority, EmailPriorityType::getTypes())) {
+            throw new ValidationException('The priority must be ' . implode(',', EmailPriorityType::getTypes()));
+        }
+
         $this->priority = $priority;
         return $this;
     }
