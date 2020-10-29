@@ -2,12 +2,12 @@
 
 namespace Eduzz\ContactCenter\Messages;
 
+use Eduzz\ContactCenter\Consts\EmailPriorityType;
 use Eduzz\ContactCenter\Entities\Person;
 use Eduzz\ContactCenter\Entities\Postback;
+use Eduzz\ContactCenter\Exceptions\ValidationException;
 use Eduzz\ContactCenter\Messages\Message;
 use Eduzz\ContactCenter\Traits\Configuration;
-use Eduzz\ContactCenter\Consts\EmailPriorityType;
-use Eduzz\ContactCenter\Exceptions\ValidationException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -106,7 +106,7 @@ class EmailMessage extends Message
 
     public function priority(string $priority = EmailPriorityType::MEDIUM)
     {
-        if(!in_array($priority, EmailPriorityType::getTypes())) {
+        if (!in_array($priority, EmailPriorityType::getTypes())) {
             throw new ValidationException('The priority must be ' . implode(',', EmailPriorityType::getTypes()));
         }
 
@@ -189,7 +189,7 @@ class EmailMessage extends Message
             $response = $this->clientHttp->request(
                 'POST',
                 $this->config->baseUrl . '/send/async-email',
-                [ 
+                [
                     'json' => $this->prepareData(),
                 ]
             );
