@@ -2,12 +2,19 @@
 
 namespace Eduzz\ContactCenter\Entities;
 
-class Metadata
+use JsonSerializable;
+
+class Metadata implements JsonSerializable
 {
 
     public function __construct()
     {
 
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     public function toArray()
