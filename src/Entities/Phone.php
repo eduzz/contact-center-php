@@ -2,7 +2,9 @@
 
 namespace Eduzz\ContactCenter\Entities;
 
-class Phone
+use JsonSerializable;
+
+class Phone implements JsonSerializable
 {
     private $countryCode;
     private $areaCode;
@@ -14,6 +16,11 @@ class Phone
         $this->countryCode = $countryCode;
         $this->areaCode    = $areaCode;
         $this->phoneNumber = $phoneNumber;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     public function toArray()
