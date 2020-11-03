@@ -25,6 +25,7 @@ class EmailMessage extends Message
     private $subject;
     private $postback;
     private $priority;
+    private $type;
 
     public function __construct(Client $clientHttp)
     {
@@ -104,6 +105,12 @@ class EmailMessage extends Message
         return $this;
     }
 
+    public function marketing()
+    {
+        $this->type = "marketing";
+        return $this;
+    }
+
     public function priority(string $priority = EmailPriorityType::MEDIUM)
     {
         if (!in_array($priority, EmailPriorityType::getTypes())) {
@@ -152,6 +159,10 @@ class EmailMessage extends Message
 
         if ($this->postback) {
             $data['postback'] = $this->postback;
+        }
+
+        if ($this->type) {
+            $data['type'] = $this->type;
         }
 
         $data['priority'] = $this->priority;
