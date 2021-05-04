@@ -107,7 +107,13 @@ class EmailMessage extends Message
 
     public function marketing()
     {
-        $this->type = "marketing";
+        $this->type = 'marketing';
+        return $this;
+    }
+
+    public function access()
+    {
+        $this->type = 'access';
         return $this;
     }
 
