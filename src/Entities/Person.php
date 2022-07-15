@@ -9,12 +9,14 @@ class Person implements JsonSerializable
     private $name;
     private $email;
     private $params;
+    private $postback;
 
-    public function __construct(string $email, string $name = null, array $params = null)
+    public function __construct(string $email, string $name = null, array $params = null, Postback $postback)
     {
         $this->email = $email;
         $this->name  = $name;
         $this->params = $params;
+        $this->postback = $postback;
     }
 
     public function jsonSerialize()
@@ -30,6 +32,9 @@ class Person implements JsonSerializable
         }
         if ($this->params) {
             $data['params'] = $this->params;
+        }
+        if ($this->postback) {
+            $data['postback'] = $this->postback;
         }
 
         return $data;
