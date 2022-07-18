@@ -11,7 +11,7 @@ class Person implements JsonSerializable
     private $params;
     private $postback;
 
-    public function __construct(string $email, string $name = null, array $params = null, Postback $postback)
+    public function __construct(string $email, string $name = null, array $params = null, Postback $postback = null)
     {
         $this->email = $email;
         $this->name  = $name;
