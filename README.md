@@ -74,7 +74,7 @@ Para realizar o envio de email simples utilize a seguinte estrutura:
 ```php
     $contaccenter
         ->createEmailMessage() //Cria mensagem de email
-        ->to(new Person('email@dominio.com.br', 'Nome do destinatario')) // Destinatario
+        ->to([new Person('email@dominio.com.br', 'Nome do destinatario')]) // Destinatario
         ->from('no-reply@dominio.com', 'Nome da empresa') // Remetente
         ->template('HRGJJDIISIW3424') // fornecido pela equipe 
         ->params([
@@ -85,7 +85,7 @@ Para realizar o envio de email simples utilize a seguinte estrutura:
             'track_id' => '123'
         ]) // Usado para colocar qualquer informação relevante para rastreio
         ->onError(function($e) {
-            echo "Envio de email não realizado" . $e->getMessage()
+            echo "Envio de email não realizado" . $e->getMessage();
         }) // Suprime o erro dentro de uma rotina de fallback
         ->send();
 ```
