@@ -26,6 +26,7 @@ class EmailMessage extends Message
     private $postback;
     private $priority;
     private $type;
+    private $providerName;
 
     public function __construct(Client $clientHttp)
     {
@@ -169,6 +170,10 @@ class EmailMessage extends Message
 
         if ($this->type) {
             $data['type'] = $this->type;
+        }
+
+        if ($this->providerName) {
+            $data['providerName'] = $this->providerName;
         }
 
         $data['priority'] = $this->priority;
